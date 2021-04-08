@@ -7,7 +7,7 @@ This is the __copy version__ of </br>
 https://github.com/sksq96/pytorch-summary/
 
 ## usage
-is same as the source library.
+as same as the source library.
 
 ## changes
 It is a little **modified** to to also print the **trainable status** of each layer such as shown in the image below:
