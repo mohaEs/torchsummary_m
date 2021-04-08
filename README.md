@@ -1,7 +1,7 @@
 # torchsummary_m
 pytorch summary 
 
-# REF:
+# source:
 This is the __copy version__ of </br>
 "Keras style model.summary() in PyTorch:" 
 https://github.com/sksq96/pytorch-summary/
