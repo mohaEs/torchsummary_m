@@ -3,8 +3,7 @@
 ''' 
 code by:
 https://github.com/sksq96/pytorch-summary/
-or 
-pip install torchsummary
+
 
 
 Modified by Moha to show the trainable status of each layer
