@@ -8,3 +8,4 @@ https://github.com/sksq96/pytorch-summary/
 and a little modified to to also print the trainable status of each layer such as shown in the image below:
 
 <img src=“IMG.png”>
+![alt text](./IMG.png)
