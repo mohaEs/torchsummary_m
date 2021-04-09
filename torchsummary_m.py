@@ -3,7 +3,8 @@
 ''' 
 code by:
 https://github.com/sksq96/pytorch-summary/
-
+or 
+pip install torchsummary
 
 
 Modified by Moha to show the trainable status of each layer
@@ -53,6 +54,10 @@ def summary_string(model, input_size, batch_size=-1, device=torch.device('cuda:0
             if hasattr(module, "weight") and hasattr(module.weight, "size"):
                 params += torch.prod(torch.LongTensor(list(module.weight.size())))
                 summary[m_key]["trainable"] = module.weight.requires_grad
+            ### MOha:
+            else: 
+                summary[m_key]["trainable"] = False
+            ### End MOha                
             if hasattr(module, "bias") and hasattr(module.bias, "size"):
                 params += torch.prod(torch.LongTensor(list(module.bias.size())))
             summary[m_key]["nb_params"] = params
@@ -95,29 +100,18 @@ def summary_string(model, input_size, batch_size=-1, device=torch.device('cuda:0
     total_output = 0
     trainable_params = 0
     for layer in summary:
-
-
-        if "trainable" in summary[layer]:
-            if summary[layer]["trainable"] == True:
-                trainable_params += summary[layer]["nb_params"]
-                # input_shape, output_shape, trainable, nb_params
-                line_new = "{:>20}  {:>25} {:>15} {:>15}".format(
-                    layer,
-                    str(summary[layer]["output_shape"]),
-                    "{0:,}".format(summary[layer]["nb_params"]), 
-                    str(summary[layer]["trainable"])        )
-            else:
-            # input_shape, output_shape, trainable, nb_params
-                line_new = "{:>20}  {:>25} {:>15} {:>15}".format(
-                layer,
-                str(summary[layer]["output_shape"]),
-                "{0:,}".format(summary[layer]["nb_params"]), 
-                "False"    )       
-            
+        # input_shape, output_shape, trainable, nb_params
+        line_new = "{:>20}  {:>25} {:>15} {:>15}".format(
+            layer,
+            str(summary[layer]["output_shape"]),
+            "{0:,}".format(summary[layer]["nb_params"]), 
+            str(summary[layer]["trainable"])        )            
         total_params += summary[layer]["nb_params"]
 
         total_output += np.prod(summary[layer]["output_shape"])
-                
+        if "trainable" in summary[layer]:
+            if summary[layer]["trainable"] == True:
+                trainable_params += summary[layer]["nb_params"]
         summary_str += line_new + "\n"
 
     # assume 4 bytes/number (float on cuda).
